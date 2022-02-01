@@ -1,0 +1,23 @@
+<div class="hover_border" >
+    <div class="hever_content" >
+      <div class="average_rate">
+        <ng-rating-bar
+        [value]="movie.vote_average / 2"
+        [ratingCount]="5"
+        [disabled]="true"
+        [styles]="{ fontSize: '25px', margin: '5px' }"
+      ></ng-rating-bar>
+      </div>
+      <div class="genres">
+        <p *ngFor="let genre of genres">
+          <span *ngIf="genre.id == movie.genre_ids[0]">{{genre.name}}</span>
+          <span *ngIf="genre.id == movie.genre_ids[1]">{{genre.name}}</span>
+        </p>
+      </div>
+      <!-- <div class="view_details" (click)="movieDetails(movie.id)"><p>View Details</p></div> -->
+    </div>
+    <img
+    [src]="'https://image.tmdb.org/t/p/w500/' + movie.poster_path"
+    alt=""
+    />
+  </div>

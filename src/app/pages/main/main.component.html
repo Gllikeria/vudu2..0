@@ -1,0 +1,106 @@
+<app-header></app-header>
+
+<header class="home-nav">
+  <button class="btn btn-primary filter-btn">
+    Filters <i class="fas fa-sort-down"></i>
+  </button>
+  <div class="checkbox-container">
+    <input type="checkbox" name="free" id="checkb" class="nav-checkbox" />
+    <span>Free movies only</span>
+  </div>
+</header>
+<hr />
+<!-- section for 3 tabs -->
+<section class="filter">
+  <div
+    class="popular"
+    [ngClass]="openTab === 'popular' ? 'active' : ''"
+    (click)="openTab = 'popular'"
+  >
+    Popular Movies
+  </div>
+  <div
+    class="trending"
+    [ngClass]="openTab === 'trending' ? 'active' : ''"
+    (click)="openTab = 'trending'"
+  >
+    Trending Movies
+  </div>
+  <div
+    class="search"
+    [ngClass]="openTab === 'search' ? 'active' : ''"
+    (click)="openTab = 'search'"
+  >
+    Search/Search a movie
+  </div>
+</section>
+<main
+  class="main-container"
+  *ngIf="openTab === 'popular'"
+  infiniteScroll
+  [infiniteScrollDistance]="1"
+  [infiniteScrollThrottle]="150"
+  (scrolled)="popularMovies()"
+  [fromRoot]="true"
+>
+  <div *ngFor="let movie of popularMoviesArr">
+    <app-movie-card [movie]="movie" [genres]="genresArr"></app-movie-card>
+  </div>
+</main>
+<!-- ტრენდული ფილმების კონტეინერი -->
+<main
+  class="main-container"
+  *ngIf="openTab === 'trending'"
+  infiniteScroll
+  [infiniteScrollDistance]="1"
+  [infiniteScrollThrottle]="150"
+  (scrolled)="trendingMovies()"
+  [fromRoot]="true"
+>
+  <div *ngFor="let movie of trendingMoviesArr">
+    <app-movie-card [movie]="movie" [genres]="genresArr"></app-movie-card>
+  </div>
+</main>
+
+<app-search *ngIf="openTab === 'search'"></app-search>
+<!-- როცა ფილმი არ მოიძებნა  -->
+<!-- <div class="no-movie" *ngIf="!firstSearch && searchedMoviesArr.length === 0 && pending">
+    <h4>No movies to show</h4>
+  </div> -->
+<!-- მოძებნილი ფილმების კონტეინერი -->
+<!-- <main
+    class="main-container"
+    *ngIf="showSeachedMovies"
+    infiniteScroll
+    [infiniteScrollDistance]="1"
+    [infiniteScrollThrottle]="150"
+    (scrolled)="searchMovie()"
+    [fromRoot]="true"
+  >
+  <div *ngFor="let movie of searchedMoviesArr">
+    <div class="hover_border">
+      <div class="hever_content">
+        <div class="average_rate">
+          <ng-rating-bar
+          [value]="movie.vote_average / 2"
+          [ratingCount]="5"
+          [disabled]="true"
+          [styles]="{ fontSize: '25px', margin: '5px' }"
+        ></ng-rating-bar>
+        </div>
+        <div class="genres">
+          <p *ngFor="let genre of genresArr">
+            <span *ngIf="genre.id == movie.genre_ids[0]">{{genre.name}}</span>
+            <span *ngIf="genre.id == movie.genre_ids[1]">{{genre.name}}</span>
+          </p>
+        </div>
+        <div class="view_details" (click)="movieDetails(movie.id)"><p>View Details</p></div>
+      </div>
+      <img
+      [src]="'https://image.tmdb.org/t/p/w500/' + movie.poster_path"
+      alt=""
+      (click)="movieDetails(movie.id)"
+      />
+    </div>
+  </div>
+  </main> -->
