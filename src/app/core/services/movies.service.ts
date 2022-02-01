@@ -15,7 +15,7 @@ export class MoviesService {
     return this.http.get(`https://api.themoviedb.org/3/movie/popular?api_key=${this._key}&language=en-US&page=${this.popularMoviesPage}`)
   }
   getTrendingMovies(){
-    return this.http.get(`https://api.themoviedb.org/3/trending/movie/day?api_key=${this._key}`)
+    return this.http.get(`https://api.themoviedb.org/3/trending/movie/day?api_key=${this._key}&language=en-US&page=${this.trendingMoviesPage}`)
   }
 
   getMovieImg(imgUrl:string){
