@@ -1,1 +1,20 @@
-<p>actor-card works!</p>
+<div class="slider">
+    <div class="top_slider">
+      <div (click)="prev()" class="prev_btn">
+        <i class="fas fa-arrow-left"></i>
+      </div>
+      <div (click)="next()" class="next_btn">
+        <i class="fas fa-arrow-right"></i>
+      </div>
+    </div>
+    <div class="cast">
+      <div *ngFor="let cast of castAndCrew" class="single_cast">
+        <img
+          [src]="'https://image.tmdb.org/t/p/w500/' + cast.profile_path"
+          alt=""
+        />
+        <h4 class="name-1">{{ cast.original_name }}</h4>
+        <p class="name-2">{{ cast.character }}</p>
+      </div>
+    </div>
+  </div>

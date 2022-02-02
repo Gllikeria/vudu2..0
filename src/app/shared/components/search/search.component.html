@@ -1,14 +1,11 @@
 <div class="input-group search-container">
-  <input
-  id="search-box"
-    #nameInput
-    [(ngModel)]="searchedMovieName"
-    type="text"
-    class="form-control search-input"
-    placeholder="Search Movie"
-    aria-label="Recipient's username"
-    aria-describedby="basic-addon2"
-  />
+  <form id="search-box" [formGroup]="mform">
+    <input
+      class="form-input"
+      placeholder="Search Movie"
+      formControlName="name"
+    />
+  </form>
   <div class="input-group-append">
     <button class="btn" type="button" (click)="searchMovie()">Search</button>
   </div>
@@ -16,12 +13,12 @@
 <main
   class="main-container"
   infiniteScroll
-  [infiniteScrollDistance]="1"
+  [infiniteScrollDistance]="2"
   [infiniteScrollThrottle]="150"
-  (scrolled)="searchMovie()"
+  (scrolled)="addMovies()"
   [fromRoot]="true"
 >
-<div *ngFor="let movie of searchedMoviesArr">
-    <app-movie-card [movie]="movie" [genres]="genresArr"></app-movie-card>
-</div>
+  <div *ngFor="let movie of searchedMoviesArr">
+    <app-movie-card [movie]="movie" [genres]="genresArr" (detailsEvent) = 'openDetails(movie.id)'></app-movie-card>
+  </div>
 </main>

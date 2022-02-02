@@ -14,7 +14,7 @@ import { DetailsComponent } from './pages/details/details.component';
 import { NgRatingBarModule } from 'ng-rating-bar';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -36,7 +36,8 @@ import { FormsModule } from '@angular/forms';
     NgRatingBarModule,
     InfiniteScrollModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

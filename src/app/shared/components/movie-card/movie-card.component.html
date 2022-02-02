@@ -14,7 +14,7 @@
           <span *ngIf="genre.id == movie.genre_ids[1]">{{genre.name}}</span>
         </p>
       </div>
-      <!-- <div class="view_details" (click)="movieDetails(movie.id)"><p>View Details</p></div> -->
+      <div class="view_details" (click)='details()'><p>View Details</p></div>
     </div>
     <img
     [src]="'https://image.tmdb.org/t/p/w500/' + movie.poster_path"

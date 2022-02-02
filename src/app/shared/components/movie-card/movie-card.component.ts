@@ -1,16 +1,18 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-movie-card',
   templateUrl: './movie-card.component.html',
-  styleUrls: ['./movie-card.component.scss']
+  styleUrls: ['./movie-card.component.scss'],
 })
 export class MovieCardComponent implements OnInit {
   @Input() genres: any = [];
   @Input() movie: any;
-  constructor() { }
+  @Output() detailsEvent: EventEmitter<any> = new EventEmitter<any>();
+  constructor() {}
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
+  details(){
+    this.detailsEvent.emit(true)
   }
-
 }

@@ -1,5 +1,14 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { debounceTime, distinctUntilChanged, filter, fromEvent, map, of, switchMap, tap } from 'rxjs';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
+import {
+  debounceTime,
+  distinctUntilChanged,
+  map,
+  of,
+  Subscription,
+  switchMap,
+} from 'rxjs';
 import { MoviesService } from 'src/app/core/services/movies.service';
 import { SearchService } from 'src/app/core/services/search.service';
 @Component({
@@ -7,55 +16,66 @@ import { SearchService } from 'src/app/core/services/search.service';
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.scss'],
 })
-export class SearchComponent implements OnInit, AfterViewInit {
-  searchedMovieName!: string;
+export class SearchComponent implements OnInit, OnDestroy {
   genresArr: any = [];
   searchedMoviesArr: any = [];
-  constructor(private search: SearchService, private movie: MoviesService) {}
+  mform: FormGroup = new FormGroup({
+    name: new FormControl(),
+  });
 
-  // searchBox = document.getElementById('search-box') as HTMLInputElement;
-  @ViewChild('nameInput', { static: true }) name!: ElementRef;
-  typeahead:any;
+  obs!: Subscription;
+  constructor(private search: SearchService, private movie: MoviesService, private router: Router) {}
   ngOnInit(): void {
     this.movie
       .getGenres()
       .subscribe((data: any) => (this.genresArr = data.genres));
-    // console.log(this.searchedMoviesArr);
-
-
+    this.searchMovie();
   }
-  ngAfterViewInit() {
-    console.log(1);
-    
-   this.typeahead = fromEvent(this.name.nativeElement, 'keyup').pipe(
-      map((e:any) => (e.target as HTMLInputElement).value),
-      debounceTime(500),
-      distinctUntilChanged(),
-      switchMap(searchTerm =>  { 
-        // console.log(searchTerm);
-        
-       return this.search.getSearchedMovie(searchTerm)
-      }),
-      tap((data)=> {console.log(data); return data}
-      ))
 
-    
-  }
   searchMovie() {
-   this.typeahead.subscribe((data:any) => {
-    console.log(data);
-  });
-    // this.search.getSearchedMovie(this.searchedMovieName)
-    // .pipe(
-    //   distinctUntilChanged(),
-    //   map((data: any) => {
-    //     console.log(this.searchedMovieName);
-
-    //     data.results.forEach((element: any) => {
-    //       this.searchedMoviesArr.push(element);
-    //     });
-    //   })
-    // )
-    // .subscribe(data => this.search.searchedMoviePage++);
+    this.mform.valueChanges
+      .pipe(
+        debounceTime(500),
+        distinctUntilChanged((previous, current) => {
+          if (!current.name.length) {
+            this.searchedMoviesArr = [];
+            return true;
+          }
+          if (JSON.stringify(previous) !== JSON.stringify(current)) {
+            this.searchedMoviesArr = [];
+            this.search.searchedMoviePage = 1;
+            return false;
+          } else return true;
+        }),
+        switchMap((id: any) => {
+          return this.search.getSearchedMovie(id.name);
+        }),
+        map((data: any) => {
+          data.results.forEach((element: any) => {
+            this.searchedMoviesArr.push(element);
+          });
+        })
+      )
+      .subscribe((newValue: any) => {
+        this.search.searchedMoviePage++;
+      });
+  }
+  addMovies() {
+    this.search
+      .getSearchedMovie(this.mform.value.name)
+      .pipe(
+        map((data: any) => {
+          data.results.forEach((element: any) => {
+            this.searchedMoviesArr.push(element);
+          });
+        })
+      )
+      .subscribe((data) => this.search.searchedMoviePage++);
+  }
+  openDetails(id:any){
+    this.router.navigate(['/details', id])
+  }
+  ngOnDestroy(): void {
+      this.search.searchedMoviePage = 1;
   }
 }

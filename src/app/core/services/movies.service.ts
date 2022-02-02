@@ -27,4 +27,7 @@ export class MoviesService {
   getGenres(){
     return this.http.get(`https://api.themoviedb.org/3/genre/movie/list?api_key=${this._key}&language=en-US`)
   }
+  getCastAndCrew(id:string|null|undefined){
+    return this.http.get(`https://api.themoviedb.org/3/movie/${id}/credits?api_key=${this._key}&language=en-US`)
+  }
 }
