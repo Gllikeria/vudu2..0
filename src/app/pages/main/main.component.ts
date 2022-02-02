@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { map } from 'rxjs';
 import { MoviesService } from 'src/app/core/services/movies.service';
 
@@ -7,8 +8,8 @@ import { MoviesService } from 'src/app/core/services/movies.service';
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.scss'],
 })
-export class MainComponent implements OnInit {
-  constructor(private movie: MoviesService) {}
+export class MainComponent implements OnInit, OnDestroy {
+  constructor(private movie: MoviesService, private router: Router) {}
   popularMoviesArr: any = [];
   trendingMoviesArr: any = [];
   searchedMoviesArr: any = [];
@@ -53,5 +54,12 @@ export class MainComponent implements OnInit {
         })
       )
       .subscribe((data) => this.movie.popularMoviesPage++);
+  }
+  openDetails(id:any){
+    this.router.navigate(['/details', id]);
+  }
+  ngOnDestroy(): void {
+      this.movie.trendingMoviesPage = 1;
+      this.movie.popularMoviesPage = 1;
   }
 }
