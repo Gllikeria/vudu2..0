@@ -1,7 +1,7 @@
 <header class="header-nav">
   <div class="nav-left">
     <ul>
-      <li class="logo">VUDU</li>
+      <li class="logo" (click)="title.emit('popular')">VUDU</li>
       <li>Movies</li>
       <li>TV</li>
       <li>My Vudu</li>
@@ -12,7 +12,7 @@
     <ul>
       <li class="name">Redeem</li>
       <li class="name">Hi, Robert!</li>
-      <li><i class="fas fa-search"></i></li>
+      <li><i class="fas fa-search" (click)="title.emit('search')"></i></li>
     </ul>
   </div>
 </header>

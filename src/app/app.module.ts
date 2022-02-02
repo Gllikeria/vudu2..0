@@ -1,13 +1,14 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { MovieCardComponent } from './shared/components/movie-card/movie-card.component';
-import { SearchComponent } from './shared/components/search/search.component';
 import { HeaderComponent } from './shared/components/header/header.component';
 import { ActorCardComponent } from './shared/components/actor-card/actor-card.component';
+import { MovieCardComponent } from './shared/components/movie-card/movie-card.component';
+import { SearchComponent } from './shared/components/search/search.component';
 import { TrailerComponent } from './shared/components/trailer/trailer.component';
+
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
 import { MainComponent } from './pages/main/main.component';
 import { DetailsComponent } from './pages/details/details.component';
 
@@ -22,12 +23,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     AppComponent,
-    MovieCardComponent,
-    SearchComponent,
+    MainComponent,
     HeaderComponent,
     ActorCardComponent,
+    MovieCardComponent,
+    SearchComponent,
     TrailerComponent,
-    MainComponent,
     DetailsComponent
   ],
   imports: [
@@ -37,7 +38,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     InfiniteScrollModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

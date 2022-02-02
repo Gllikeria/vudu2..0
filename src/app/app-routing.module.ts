@@ -5,9 +5,9 @@ import { MainComponent } from './pages/main/main.component';
 
 
 const routes: Routes = [
-  {path: 'home', component:MainComponent},
-  {path: 'details/:id', component: DetailsComponent},
-  {path: '', component:MainComponent, pathMatch: 'full' },
+ {path: 'home', component: MainComponent},
+ {path: 'details/:id', component: DetailsComponent},
+ {path: '', component: MainComponent},
 ];
 
 @NgModule({

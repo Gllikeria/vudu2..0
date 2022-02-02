@@ -12,8 +12,14 @@ export class MainComponent implements OnInit, OnDestroy {
   constructor(private movie: MoviesService, private router: Router) {}
   popularMoviesArr: any = [];
   trendingMoviesArr: any = [];
+  searchedMoviesArr: any = [];
   genresArr: any = [];
   openTab: 'popular' | 'trending' | 'search' = 'popular';
+  showSeachedMovies: boolean = false;
+  firstSearch: boolean = true;
+  pending: boolean = false;
+  searchedMovieName: string = '';
+  oldMovieName: string = '';
 
   ngOnInit(): void {
     this.movie
@@ -52,7 +58,6 @@ export class MainComponent implements OnInit, OnDestroy {
   openDetails(id:any){
     this.router.navigate(['/details', id]);
   }
-
   ngOnDestroy(): void {
       this.movie.trendingMoviesPage = 1;
       this.movie.popularMoviesPage = 1;
