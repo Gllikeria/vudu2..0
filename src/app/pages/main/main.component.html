@@ -34,6 +34,8 @@
     Search/Search a movie
   </div>
 </section>
+
+<!-- პოპულარული ფილმების კონტეინერი -->
 <main
   class="main-container"
   *ngIf="openTab === 'popular'"
@@ -47,6 +49,7 @@
     <app-movie-card [movie]="movie" [genres]="genresArr" (detailsEvent) = 'openDetails(movie.id)'></app-movie-card>
   </div>
 </main>
+
 <!-- ტრენდული ფილმების კონტეინერი -->
 <main
   class="main-container"

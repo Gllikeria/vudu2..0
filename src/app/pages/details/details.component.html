@@ -1,6 +1,5 @@
 <app-header></app-header>
 <main>
-  <!-- MOVIE DETAILS -->
   <div class="movie_details">
     <img
       [src]="'https://image.tmdb.org/t/p/w500/' + movieObj.poster_path"
@@ -15,7 +14,6 @@
             class="genres"
             *ngFor="let genre of twoGenre"
           >
-            <!-- მარტო პირველი ორი ჟანრი გამოაქვს -->
             <p>{{ genre.name }} |</p>
           </div>
           <div>
@@ -28,7 +26,6 @@
         </div>
       </div>
       <div class="line-2">
-        <!-- რეიტინგის ვარსკვლავეიბით გამოტანა -->
         <ng-rating-bar
           [value]="movieObj.vote_average / 2"
           [ratingCount]="5"
@@ -43,7 +40,6 @@
         <p class="redeem">Redeem</p>
       </div>
       <div class="line-4">
-        <!-- დესქრიფშენის შამოშლა/აშლა და თუ დესქრიფშენი არ აქვს ღილაკს საერთოდ არ გამოაჩენს -->
         <p [ngClass]="{ more: btnText == 'More' }" *ngIf="movieObj.overview">
           {{ movieObj.overview }}
         </p>
@@ -65,7 +61,6 @@
   </div>
   <hr class="hr" />
 
-  <!-- CAST & CREW -->
   <h2 class="cast_title">Cast & Crew</h2>
   <app-actor-card [castAndCrew] = 'castAndCrewObj.cast'></app-actor-card>
 </main>

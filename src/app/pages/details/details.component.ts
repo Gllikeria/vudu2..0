@@ -18,7 +18,6 @@ export class DetailsComponent implements OnInit {
   movieObj: any;
   twoGenre: any;
   castAndCrewObj: any;
-  castArr: any;
 
   ngOnInit(): void {
     this.movieId = this.activatedRoute.snapshot.paramMap.get('id');
