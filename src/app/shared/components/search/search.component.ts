@@ -23,20 +23,21 @@ export class SearchComponent implements OnInit, OnDestroy {
     name: new FormControl(),
   });
 
-  obs!: Subscription;
+  searchedSub = new Subscription();
+  genresSub = new Subscription();
   constructor(
     private search: SearchService,
     private movie: MoviesService,
     private router: Router
   ) {}
   ngOnInit(): void {
-    this.movie
+    this.genresSub = this.movie
       .getGenres()
       .subscribe((data: any) => (this.genresArr = data.genres));
     this.searchMovie();
   }
   searchMovie() {
-    this.mform.valueChanges
+    this.searchedSub = this.mform.valueChanges
       .pipe(
         debounceTime(500),
         distinctUntilChanged((previous, current) => {
@@ -64,7 +65,7 @@ export class SearchComponent implements OnInit, OnDestroy {
       });
   }
   addMovies() {
-    this.search
+    this.searchedSub = this.search
       .getSearchedMovie(this.mform.value.name)
       .pipe(
         map((data: any) => {
@@ -80,5 +81,7 @@ export class SearchComponent implements OnInit, OnDestroy {
   }
   ngOnDestroy(): void {
     this.search.searchedMoviePage = 1;
+    this.genresSub.unsubscribe();
+    this.searchedSub.unsubscribe();
   }
 }

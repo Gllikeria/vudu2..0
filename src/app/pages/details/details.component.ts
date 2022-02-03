@@ -19,12 +19,12 @@ export class DetailsComponent implements OnInit, OnDestroy {
   movieObj: any;
   twoGenre: any;
   castAndCrewObj: any;
-  castAndCrewObjSub = new Subscription;
-  movieObjSub = new Subscription;
+  castAndCrewObjSub = new Subscription();
+  movieObjSub = new Subscription();
 
   ngOnInit(): void {
     this.movieId = this.activatedRoute.snapshot.paramMap.get('id');
-    this.movieObjSub =  this.movie
+    this.movieObjSub = this.movie
       .getMovieDetils(this.movieId)
       .pipe(
         map((data: any) => {
@@ -50,13 +50,13 @@ export class DetailsComponent implements OnInit, OnDestroy {
       this.btnText = 'More';
     }
   }
-  toHomePage(event:any){
-    if(event === 'popular') {
-      this.router.navigate(['home'])
+  toHomePage(event: any) {
+    if (event === 'popular') {
+      this.router.navigate(['home']);
     }
   }
   ngOnDestroy(): void {
-      this.movieObjSub.unsubscribe()
-      this.castAndCrewObjSub.unsubscribe()
+    this.movieObjSub.unsubscribe();
+    this.castAndCrewObjSub.unsubscribe();
   }
 }
