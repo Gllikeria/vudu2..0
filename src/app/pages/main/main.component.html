@@ -1,4 +1,4 @@
-<app-header></app-header>
+<app-header (title)="openTab = $event"></app-header>
 
 <header class="home-nav">
   <button class="btn btn-primary filter-btn">
@@ -15,21 +15,21 @@
   <div
     class="popular"
     [ngClass]="openTab === 'popular' ? 'active' : ''"
-    (click)="openTab = 'popular'"
+    (click)="openTab = 'popular'" 
   >
     Popular Movies
   </div>
   <div
     class="trending"
     [ngClass]="openTab === 'trending' ? 'active' : ''"
-    (click)="openTab = 'trending'"
+    (click)="openTab = 'trending'" 
   >
     Trending Movies
   </div>
   <div
     class="search"
     [ngClass]="openTab === 'search' ? 'active' : ''"
-    (click)="openTab = 'search'"
+    (click)="openTab = 'search'" 
   >
     Search/Search a movie
   </div>
@@ -65,4 +65,4 @@
   </div>
 </main>
 
-<app-search *ngIf="openTab === 'search'"></app-search>
+<app-search *ngIf="openTab === 'search'"></app-search> 

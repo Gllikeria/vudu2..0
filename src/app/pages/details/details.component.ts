@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { map, take } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
+import { map } from 'rxjs';
 import { MoviesService } from 'src/app/core/services/movies.service';
 
 @Component({
@@ -11,7 +11,8 @@ import { MoviesService } from 'src/app/core/services/movies.service';
 export class DetailsComponent implements OnInit {
   constructor(
     private movie: MoviesService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private router: Router
   ) {}
 
   movieId!: string | null;
@@ -45,6 +46,11 @@ export class DetailsComponent implements OnInit {
       this.btnText = 'Less';
     } else {
       this.btnText = 'More';
+    }
+  }
+  toHomePage(event:any){
+    if(event === 'popular') {
+      this.router.navigate(['home'])
     }
   }
 }
