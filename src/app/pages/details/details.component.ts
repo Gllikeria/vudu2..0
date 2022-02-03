@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { map } from 'rxjs';
+import { map, Subscription } from 'rxjs';
 import { MoviesService } from 'src/app/core/services/movies.service';
 
 @Component({
@@ -8,7 +8,7 @@ import { MoviesService } from 'src/app/core/services/movies.service';
   templateUrl: './details.component.html',
   styleUrls: ['./details.component.scss'],
 })
-export class DetailsComponent implements OnInit {
+export class DetailsComponent implements OnInit, OnDestroy {
   constructor(
     private movie: MoviesService,
     private activatedRoute: ActivatedRoute,
@@ -19,10 +19,12 @@ export class DetailsComponent implements OnInit {
   movieObj: any;
   twoGenre: any;
   castAndCrewObj: any;
+  castAndCrewObjSub = new Subscription;
+  movieObjSub = new Subscription;
 
   ngOnInit(): void {
     this.movieId = this.activatedRoute.snapshot.paramMap.get('id');
-    this.movieObj = this.movie
+    this.movieObjSub =  this.movie
       .getMovieDetils(this.movieId)
       .pipe(
         map((data: any) => {
@@ -34,7 +36,7 @@ export class DetailsComponent implements OnInit {
       .subscribe((data: any) => {
         this.twoGenre = data;
       });
-    this.castAndCrewObj = this.movie
+    this.castAndCrewObjSub = this.movie
       .getCastAndCrew(this.movieId)
       .subscribe((data) => {
         this.castAndCrewObj = data;
@@ -52,5 +54,9 @@ export class DetailsComponent implements OnInit {
     if(event === 'popular') {
       this.router.navigate(['home'])
     }
+  }
+  ngOnDestroy(): void {
+      this.movieObjSub.unsubscribe()
+      this.castAndCrewObjSub.unsubscribe()
   }
 }

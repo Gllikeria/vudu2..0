@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { map } from 'rxjs';
+import { map, Subscription } from 'rxjs';
 import { MoviesService } from 'src/app/core/services/movies.service';
 
 @Component({
@@ -15,15 +15,18 @@ export class MainComponent implements OnInit, OnDestroy {
   genresArr: any = [];
   openTab: 'popular' | 'trending' | 'search' = 'popular';
 
+  genresSub = new Subscription();
+  trendingMoviesSub = new Subscription();
+  popularMoviesSub = new Subscription();
   ngOnInit(): void {
-    this.movie
+    this.genresSub = this.movie
       .getGenres()
       .subscribe((data: any) => (this.genresArr = data.genres));
     this.popularMovies();
     this.trendingMovies();
   }
   trendingMovies() {
-    this.movie
+    this.trendingMoviesSub = this.movie
       .getTrendingMovies()
       .pipe(
         map((data: any) => {
@@ -38,7 +41,7 @@ export class MainComponent implements OnInit, OnDestroy {
   }
 
   popularMovies() {
-    this.movie
+    this.popularMoviesSub = this.movie
       .getPopularMovies()
       .pipe(
         map((data: any) => {
@@ -49,13 +52,14 @@ export class MainComponent implements OnInit, OnDestroy {
       )
       .subscribe((data) => this.movie.popularMoviesPage++);
   }
-  openDetails(id:any){
+  openDetails(id: any) {
     this.router.navigate(['/details', id]);
   }
   ngOnDestroy(): void {
-      this.movie.trendingMoviesPage = 1;
-      this.movie.popularMoviesPage = 1;
+    this.movie.trendingMoviesPage = 1;
+    this.movie.popularMoviesPage = 1;
+    this.genresSub.unsubscribe();
+    this.trendingMoviesSub.unsubscribe();
+    this.popularMoviesSub.unsubscribe();
   }
 }
-
-
