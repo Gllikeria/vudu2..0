@@ -22,3 +22,4 @@
     <app-movie-card [movie]="movie" [genres]="genresArr" (detailsEvent) = 'openDetails(movie.id)'></app-movie-card>
   </div>
 </main>
+<div class="no-movies" *ngIf="searchedMoviesArr.length === 0 && mform.get('name')?.dirty && mform.get('name')?.value">No Movies To Show</div>

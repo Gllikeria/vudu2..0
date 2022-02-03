@@ -24,14 +24,17 @@ export class SearchComponent implements OnInit, OnDestroy {
   });
 
   obs!: Subscription;
-  constructor(private search: SearchService, private movie: MoviesService, private router: Router) {}
+  constructor(
+    private search: SearchService,
+    private movie: MoviesService,
+    private router: Router
+  ) {}
   ngOnInit(): void {
     this.movie
       .getGenres()
       .subscribe((data: any) => (this.genresArr = data.genres));
     this.searchMovie();
   }
-
   searchMovie() {
     this.mform.valueChanges
       .pipe(
@@ -72,10 +75,10 @@ export class SearchComponent implements OnInit, OnDestroy {
       )
       .subscribe((data) => this.search.searchedMoviePage++);
   }
-  openDetails(id:any){
-    this.router.navigate(['/details', id])
+  openDetails(id: any) {
+    this.router.navigate(['/details', id]);
   }
   ngOnDestroy(): void {
-      this.search.searchedMoviePage = 1;
+    this.search.searchedMoviePage = 1;
   }
 }
