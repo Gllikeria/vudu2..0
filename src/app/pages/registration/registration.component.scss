@@ -1,0 +1,29 @@
+.registration-from {
+  width: 50%;
+  margin: 5% auto;
+  padding: 2% 7%;
+
+  button {
+    width: 91%;
+    border-radius: 5px;
+    height: 50px;
+    margin-top: 2%;
+  }
+  .gender-checkboxes{
+      input{
+          margin-left: 2%;
+          margin-right: 10%;
+      }
+  }
+}
+.test {
+  margin: 0 15px;
+}
+.red {
+  color: red;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}

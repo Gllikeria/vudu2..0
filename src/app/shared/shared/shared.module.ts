@@ -26,7 +26,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     InfiniteScrollModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   exports: [
     CommonModule,
@@ -39,8 +39,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     InfiniteScrollModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
-    
+    ReactiveFormsModule,
   ],
 })
 export class SharedModule {}

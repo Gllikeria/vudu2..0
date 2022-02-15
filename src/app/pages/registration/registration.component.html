@@ -1,0 +1,215 @@
+<app-header
+  (title)="homeComponent($event)"
+  [displayNoneFromRegistration]="true"
+></app-header>
+
+<form
+  [formGroup]="contactForm"
+  (ngSubmit)="onSubmit()"
+  class="registration-from"
+>
+  <!-- firstname -->
+  <div class="form-group row">
+    <label class="col-sm-4 col-form-label"
+      ><span [class.red]="firstname?.invalid && firstname?.touched">*</span>
+      Name:</label
+    >
+    <div class="col-sm-7">
+      <input
+        type="text"
+        class="form-control"
+        [class.is-invalid]="firstname?.invalid && firstname?.touched"
+        formControlName="firstname"
+        placeholder="Name"
+      />
+      <div *ngIf="firstname?.invalid && firstname?.touched">
+        <small class="text-danger" *ngIf=' firstname?.errors?.["required"]'
+          >Firstname is required</small
+        >
+      </div>
+    </div>
+  </div>
+
+  <!-- email -->
+  <div class="form-group row">
+    <label class="col-sm-4 col-form-label"
+      ><span [class.red]="email?.invalid && email?.touched">*</span>
+      E-mail:</label
+    >
+    <div class="col-sm-7">
+      <input
+        type="email"
+        class="form-control"
+        [class.is-invalid]="email?.invalid && email?.touched"
+        formControlName="email"
+        placeholder="E-mail"
+      />
+      <div *ngIf="email?.invalid && email?.touched">
+        <small class="text-danger" *ngIf=' email?.errors?.["required"]'
+          >email is required</small
+        >
+        <small *ngIf=' email?.errors?.["pattern"]' class="text-danger"
+          >Input doesn't match email type</small
+        >
+      </div>
+    </div>
+  </div>
+
+  <!-- password -->
+  <div class="form-group row">
+    <label class="col-sm-4 col-form-label"
+      ><span [class.red]="password?.invalid && password.touched">*</span>
+      Password:</label
+    >
+    <div class="col-sm-7">
+      <input
+        type="password"
+        class="form-control"
+        [class.is-invalid]="password?.invalid && password?.touched"
+        formControlName="password"
+        placeholder="Password"
+      />
+      <div *ngIf="password?.invalid && password?.touched">
+        <small class="text-danger" *ngIf=' password?.errors?.["required"]'
+          >Password is required</small
+        >
+      </div>
+    </div>
+  </div>
+
+  <!-- confirm password -->
+  <div class="form-group row">
+    <label class="col-sm-4 col-form-label"
+      ><span [class.red]="confirmPassword?.invalid && confirmPassword?.touched"
+        >*</span
+      >
+      Confirm Password:</label
+    >
+    <div class="col-sm-7">
+      <input
+        type="password"
+        class="form-control"
+        [class.is-invalid]="
+          confirmPassword?.invalid && confirmPassword?.touched
+        "
+        formControlName="confirmPassword"
+        placeholder="Confirm Password"
+      />
+      <div *ngIf="confirmPassword?.invalid && confirmPassword?.touched">
+        <small
+          class="text-danger"
+          *ngIf=' confirmPassword?.errors?.["required"]'
+          >Password confirmation is required</small
+        >
+      </div>
+      <small *ngIf=" contactForm.errors?.['misMatch']" class="text-danger"
+        >Passwords do not match</small
+      >
+    </div>
+  </div>
+
+  <!-- phone number -->
+  <div class="form-group row">
+    <label class="col-sm-4 col-form-label"
+      ><span [class.red]="phoneNumber?.invalid && phoneNumber?.touched">*</span>
+      Phone Number:</label
+    >
+    <div class="col-sm-7">
+      <input
+        type="number"
+        class="form-control"
+        [class.is-invalid]="phoneNumber?.invalid && phoneNumber?.touched"
+        formControlName="phoneNumber"
+        placeholder="Phone Number"
+      />
+      <div *ngIf="phoneNumber?.invalid && phoneNumber?.touched">
+        <small class="text-danger" *ngIf=' phoneNumber?.errors?.["required"]'
+          >Phone number is required</small
+        >
+      </div>
+    </div>
+  </div>
+
+  <!-- date of birth -->
+
+
+
+  <!-- gender -->
+  <div class="form-group row">
+    <label class="col-sm-4 col-form-label"><span>*</span> Gender:</label>
+    <div class="col-sm-7 gender-checkboxes">
+      <label for="gender ">Male:</label>
+      <input type="radio" name="gender" formControlName="gender" value="male" />
+
+      <label for="gender">Female:</label>
+      <input
+        type="radio"
+        name="gender"
+        formControlName="gender"
+        value="female"
+      />
+
+      <label for="gender">Other:</label>
+      <input
+        type="radio"
+        name="gender"
+        formControlName="gender"
+        value="other"
+      />
+    </div>
+  </div>
+
+  <!-- language -->
+  <div class="form-group row">
+    <label class="col-sm-4 col-form-label"><span [class.red]="language?.invalid && language?.touched">*</span> Language:</label>
+    <div>
+    <select
+      aria-label="Default select example"
+      formControlName="language"
+    >
+      <option value="" disabled>Select Language</option>
+      <option *ngFor="let i of languages" [ngValue]="i">{{ i }}</option>
+
+    </select>
+    <div *ngIf=" language?.invalid &&  language?.touched">
+      <small class="text-danger" *ngIf=' language?.errors?.["required"]'>Language is
+          required</small>
+      </div>
+  </div>
+  </div>
+
+  <!-- zip -->
+  <div class="form-group row">
+    <label class="col-sm-4 col-form-label"><span [class.red]="zip?.invalid && zip?.touched">*</span> Zip:</label>
+    <div class="col-sm-7">
+      <input
+        type="text"
+        class="form-control"
+        formControlName="zip"
+        placeholder="Zip Code"
+      />
+      <div *ngIf=" zip?.invalid &&  zip?.touched">
+        <small class="text-danger" *ngIf=' zip?.errors?.["required"]'>Zip is
+            required</small>
+        </div>
+    </div>
+  </div>
+
+  <!-- about -->
+  <div class="form-group row">
+    <label class="col-sm-4 col-form-label"><span [class.red]="about?.invalid && about?.touched">*</span>About:</label>
+    <div class="col-sm-7">
+      <textarea
+        type="text"
+        class="form-control"
+        formControlName="about"
+        placeholder="About You"
+      ></textarea>
+      <div *ngIf=" about?.invalid &&  about?.touched">
+        <small class="text-danger" *ngIf=' about?.errors?.["required"]'> About is
+            required</small>
+        </div>
+    </div>
+  </div>
+  <button [disabled]="!contactForm.valid">submit</button>
+</form>

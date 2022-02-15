@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-
+import {BsDatepickerModule, BsDatepickerConfig } from "ngx-bootstrap/datepicker"
 
 
 @NgModule({
@@ -19,8 +19,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    BsDatepickerModule.forRoot()
   ],
-  providers: [],
+  providers: [BsDatepickerConfig],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

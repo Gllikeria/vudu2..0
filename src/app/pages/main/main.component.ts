@@ -28,14 +28,10 @@ export class MainComponent implements OnInit, OnDestroy {
   trendingMovies() {
     this.trendingMoviesSub = this.movie
       .getTrendingMovies()
-      .pipe(
-        map((data: any) => {
-          data.results.forEach((element: any) => {
-            this.trendingMoviesArr.push(element);
-          });
-        })
-      )
-      .subscribe((data) => {
+      .subscribe((data: any) => {
+        data.results.forEach((element: any) => {
+          this.trendingMoviesArr.push(element);
+        });
         this.movie.trendingMoviesPage++;
       });
   }
@@ -43,14 +39,21 @@ export class MainComponent implements OnInit, OnDestroy {
   popularMovies() {
     this.popularMoviesSub = this.movie
       .getPopularMovies()
-      .pipe(
-        map((data: any) => {
-          data.results.forEach((element: any) => {
-            this.popularMoviesArr.push(element);
-          });
-        })
-      )
-      .subscribe((data) => this.movie.popularMoviesPage++);
+      .subscribe((data: any) => {
+        data.results.forEach((element: any) => {
+          this.popularMoviesArr.push(element);
+        });
+        this.movie.popularMoviesPage++;
+      });
+  }
+  singUpComponent(event: boolean) {
+    if (event) {
+      this.router.navigate(['sign-up']);
+    }
+  }
+  test(e:any){
+    console.log(e);
+    
   }
   openDetails(id: any) {
     this.router.navigate(['/details', id]);

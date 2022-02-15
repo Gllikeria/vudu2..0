@@ -13,6 +13,11 @@ const routes: Routes = [
       import('./pages/details/details.module').then((m) => m.DetailsModule),
   },
   {
+    path: 'sign-up',
+    loadChildren: () =>
+      import('./pages/registration/registration.module').then((m) => m.RegistrationModule),
+  },
+  {
     path: '',
     loadChildren: () =>
       import('./pages/main/main.module').then((m) => m.MainModule),

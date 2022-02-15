@@ -8,11 +8,11 @@
       <li>Free</li>
     </ul>
   </div>
-  <div class="nav-right">
+  <div class="nav-right" [ngClass]="displayNoneFromRegistration ? 'd_none' : '' ">
     <ul>
-      <li class="name">Redeem</li>
-      <li class="name">Hi, Robert!</li>
-      <li><i class="fas fa-search" (click)="title.emit('search')"></i></li>
+      <!-- <li class="name">Redeem</li> -->
+      <li class="name" (click)="signUp.emit(true)">Sign up</li>
+      <li><i class="fas fa-search" (click)="title.emit('search')" ></i></li>
     </ul>
   </div>
 </header>
