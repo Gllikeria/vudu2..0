@@ -130,10 +130,6 @@
     </div>
   </div>
 
-  <!-- date of birth -->
-
-
-
   <!-- gender -->
   <div class="form-group row">
     <label class="col-sm-4 col-form-label"><span>*</span> Gender:</label>
@@ -159,57 +155,79 @@
     </div>
   </div>
 
+  <!-- date of birth -->
+  <div class="form-group row">
+    <label class="col-sm-4 col-form-label"><span>*</span> Date of Birth:</label>
+    <div class="col-sm-7 dateOfBirth">
+      <input type="date" name="" id="" formControlName="dateOfBirth" />
+    </div>
+    <div *ngIf="dateofBirth?.invalid && dateofBirth?.touched">
+      <small class="text-danger" *ngIf=' dateofBirth?.errors?.["required"]'
+        >Date of Birth is required</small
+      >
+    </div>
+  </div>
+
   <!-- language -->
   <div class="form-group row">
-    <label class="col-sm-4 col-form-label"><span [class.red]="language?.invalid && language?.touched">*</span> Language:</label>
-    <div>
-    <select
-      aria-label="Default select example"
-      formControlName="language"
+    <label class="col-sm-4 col-form-label"
+      ><span [class.red]="language?.invalid && language?.touched">*</span>
+      Language:</label
     >
-      <option value="" disabled>Select Language</option>
-      <option *ngFor="let i of languages" [ngValue]="i">{{ i }}</option>
-
-    </select>
-    <div *ngIf=" language?.invalid &&  language?.touched">
-      <small class="text-danger" *ngIf=' language?.errors?.["required"]'>Language is
-          required</small>
+    <div class="language-div">
+      <select aria-label="Default select example" formControlName="language">
+        <option value="" disabled>Select Language</option>
+        <option *ngFor="let i of languages" [ngValue]="i">{{ i }}</option>
+      </select>
+      <div *ngIf="language?.invalid && language?.touched">
+        <small class="text-danger" *ngIf=' language?.errors?.["required"]'
+          >Language is required</small
+        >
       </div>
-  </div>
+    </div>
   </div>
 
   <!-- zip -->
   <div class="form-group row">
-    <label class="col-sm-4 col-form-label"><span [class.red]="zip?.invalid && zip?.touched">*</span> Zip:</label>
+    <label class="col-sm-4 col-form-label"
+      ><span [class.red]="zip?.invalid && zip?.touched">*</span> Zip:</label
+    >
     <div class="col-sm-7">
       <input
         type="text"
         class="form-control"
         formControlName="zip"
+        [class.is-invalid]="zip?.invalid && zip?.touched"
         placeholder="Zip Code"
       />
-      <div *ngIf=" zip?.invalid &&  zip?.touched">
-        <small class="text-danger" *ngIf=' zip?.errors?.["required"]'>Zip is
-            required</small>
-        </div>
+      <div *ngIf="zip?.invalid && zip?.touched">
+        <small class="text-danger" *ngIf=' zip?.errors?.["required"]'
+          >Zip is required</small
+        >
+      </div>
     </div>
   </div>
 
   <!-- about -->
   <div class="form-group row">
-    <label class="col-sm-4 col-form-label"><span [class.red]="about?.invalid && about?.touched">*</span>About:</label>
+    <label class="col-sm-4 col-form-label"
+      ><span [class.red]="about?.invalid && about?.touched">* </span
+      > About:</label
+    >
     <div class="col-sm-7">
       <textarea
         type="text"
         class="form-control"
         formControlName="about"
+        [class.is-invalid]="about?.invalid && about?.touched"
         placeholder="About You"
       ></textarea>
-      <div *ngIf=" about?.invalid &&  about?.touched">
-        <small class="text-danger" *ngIf=' about?.errors?.["required"]'> About is
-            required</small>
-        </div>
+      <div *ngIf="about?.invalid && about?.touched">
+        <small class="text-danger" *ngIf=' about?.errors?.["required"]'>
+          About is required</small
+        >
+      </div>
     </div>
   </div>
-  <button [disabled]="!contactForm.valid">submit</button>
+  <button [disabled]="!contactForm.valid">Register</button>
 </form>
