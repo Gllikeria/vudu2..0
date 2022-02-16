@@ -1,9 +1,11 @@
 .registration-from {
+  background-color: #014e893f;
   width: 50%;
   margin: 5% auto;
   padding: 2% 7%;
+  padding-left: 10%;
   button:disabled,
-  button[disabled]{
+  button[disabled] {
     border: none;
     background-color: #014e898f;
     color: #666666;
@@ -21,35 +23,35 @@
     border: none;
   }
 
-  .gender-checkboxes{
-      input{
-          margin-left: 2%;
-          margin-right: 10%;
-      }
+  .gender-checkboxes {
+    input {
+      margin-left: 2%;
+      margin-right: 10%;
+    }
   }
-}
-.test {
-  margin: 0 15px;
-}
-.red {
-  color: red;
-}
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
+  .test {
+    margin: 0 15px;
+  }
+  .red {
+    color: red;
+  }
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
 
-.language-div{
-  width: 54%;
-  margin-left: 2%;
-  select{
-    width: 100%;
-    height: 80%;
+  .language-div {
+    width: 54%;
+    margin-left: 2%;
+    select {
+      width: 100%;
+      height: 80%;
+    }
   }
-}
-.dateOfBirth{
-  input{
-    width: 100%;
+  .dateOfBirth {
+    input {
+      width: 100%;
+    }
   }
 }
