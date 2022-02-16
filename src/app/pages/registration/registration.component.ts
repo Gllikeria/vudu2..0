@@ -59,7 +59,7 @@ export class RegistrationComponent implements OnInit {
       password: ['', [Validators.required,]],
       confirmPassword: ['', [Validators.required,]],
       phoneNumber: ['', [Validators.required,]],
-      dateOfBirth: ['',],
+      dateOfBirth: ['',Validators.required],
       gender: ['', [Validators.required,]],
       language: ['', [Validators.required,]],
       zip: ['', [Validators.required,]],

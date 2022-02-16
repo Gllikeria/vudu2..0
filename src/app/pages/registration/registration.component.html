@@ -157,14 +157,14 @@
 
   <!-- date of birth -->
   <div class="form-group row">
-    <label class="col-sm-4 col-form-label"><span>*</span> Date of Birth:</label>
+    <label class="col-sm-4 col-form-label"><span [class.red]="dateofBirth?.invalid && dateofBirth?.touched">*</span> Date of Birth:</label>
     <div class="col-sm-7 dateOfBirth">
       <input type="date" name="" id="" formControlName="dateOfBirth" />
-    </div>
-    <div *ngIf="dateofBirth?.invalid && dateofBirth?.touched">
-      <small class="text-danger" *ngIf=' dateofBirth?.errors?.["required"]'
-        >Date of Birth is required</small
-      >
+      <div *ngIf=" dateofBirth?.touched">
+        <small class="text-danger" *ngIf=' dateofBirth?.errors?.["required"]'
+          >Date of Birth is required</small
+        >
+      </div>
     </div>
   </div>
 
