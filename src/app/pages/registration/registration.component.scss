@@ -2,13 +2,25 @@
   width: 50%;
   margin: 5% auto;
   padding: 2% 7%;
+  button:disabled,
+  button[disabled]{
+    border: none;
+    background-color: #014e898f;
+    color: #666666;
+    border: none;
+  }
 
   button {
     width: 91%;
     border-radius: 5px;
     height: 50px;
     margin-top: 2%;
+    background-color: #014d89;
+    color: #ffffff;
+    padding: 5px 10px;
+    border: none;
   }
+
   .gender-checkboxes{
       input{
           margin-left: 2%;
