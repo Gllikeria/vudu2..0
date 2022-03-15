@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { map, Subscription } from 'rxjs';
+import { map, Subject, Subscription } from 'rxjs';
 import { MoviesService } from 'src/app/core/services/movies.service';
 
 @Component({
@@ -9,7 +9,9 @@ import { MoviesService } from 'src/app/core/services/movies.service';
   styleUrls: ['./main.component.scss'],
 })
 export class MainComponent implements OnInit, OnDestroy {
+
   constructor(private movie: MoviesService, private router: Router) {}
+
   popularMoviesArr: any = [];
   trendingMoviesArr: any = [];
   genresArr: any = [];

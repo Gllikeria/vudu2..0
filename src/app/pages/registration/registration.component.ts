@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { passwordValidator } from './form-validators';
@@ -11,8 +11,7 @@ export class RegistrationComponent implements OnInit {
   emailPattern = '^[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$';
   languages: string[] = ['English', 'Georgian', 'German', 'Spanish', 'Russian'];
   contactForm: any;
-
-  constructor(private router: Router, private formBuilder: FormBuilder) {}
+    constructor(private router: Router, private formBuilder: FormBuilder) {}
 
   ngOnInit(): void {
     this.contactForm = this.formBuilder.group(
@@ -69,7 +68,7 @@ export class RegistrationComponent implements OnInit {
     return this.contactForm.get('about');
   }
   onSubmit() {
-    console.log(this.contactForm.value);
+    // console.log(this.contactForm.value);
     this.contactForm.reset();
   }
 }
